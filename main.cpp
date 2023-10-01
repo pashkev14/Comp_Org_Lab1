@@ -136,7 +136,8 @@ int main() {
 				break;
 			} 
 			while (true);
-			std::cout << "\nИсходное число: " << std::setprecision(17) << std::fixed << num.f << "\nДвоичное представление: ";
+			std::cout << std::setprecision(17) << std::fixed;
+			std::cout << "\nИсходное число: " << num.f << "\nДвоичное представление: ";
 			for (int i = ((sizeof(double) * 8) - 1); i >= 0; --i) {
 				std::cout << ((num.u >> i) & 1);
 				if (i == 63 || i == 52) std::cout << " ";
@@ -147,7 +148,7 @@ int main() {
 			do {
 				std::cout << "Введите желаемое количество разрядов на изменение (от 1 до 64, или 0, если не собираетесь выполнять этот шаг): ";
 				std::cin >> count;
-				if (std::cin.fail() || (count < 1 || count > 64)) {
+				if (std::cin.fail() || count > 64) {
 					std::cout << "Введены некорректные данные! Попробуйте еще раз!\n\n";
 					std::cin.clear();
 					std::cin.ignore(32767, '\n');
@@ -187,7 +188,7 @@ int main() {
 				} 
 				while (true);
 			}
-			std::cout << "\nИсходное число: " << std::setprecision(17) << std::fixed << num.f;
+			std::cout << "\nИсходное число: " << num.f;
 			std::cout << "\nБыло:  ";
 			std::cout << ((num.u >> ((sizeof(double) * 8) - 1)) & 1) << " ";
 			for (int i = ((sizeof(double) * 8) - 2); i >= 0; --i) {
@@ -207,12 +208,14 @@ int main() {
 			std::cout << ((num.u >> ((sizeof(double) * 8) - 1)) & 1) << " ";
 			for (int i = ((sizeof(double) * 8) - 2); i >= 0; --i) {
 				std::cout << ((num.u >> i) & 1);
+				if (i == 63 || i == 52) std::cout << " ";
 			}
-			std::cout << "\nНовое число: " << std::setprecision(17) << std::fixed << num.f;
+			std::cout << "\nНовое число: " << num.f;
 			std::cout << "\n\n";
 			std::cin.clear();
 			std::cin.ignore(32767, '\n');
 			for (int i = 0; i < 64; ++i) bits[i] = nullptr;
+			std::cout << std::setprecision(-1) << std::defaultfloat;
 			break;
 		case 0:
 			exit = true;
